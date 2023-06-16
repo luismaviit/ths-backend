@@ -1,7 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
+// const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'test';
 const config = require(__dirname + '/../../config/database.js')[env];
 const db = {};
