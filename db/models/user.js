@@ -2,10 +2,10 @@
 const {
   Model
 } = require('sequelize');
+
 const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
-
-
   User.init({
     name: DataTypes.STRING,
     last_name: DataTypes.STRING,
@@ -21,18 +21,22 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+
   User.beforeCreate( async user =>{
     user.password = await user.generatePasswordHash();
   });
+
   User.beforeUpdate( async (user, options) =>{
     if(user.password != user._previousDataValues.password){
       user.password = await user.generatePasswordHash();
     }
   });
+
   User.prototype.generatePasswordHash = function () {
     if (this.password) {
       return bcrypt.hash(this.password, 10);
     }
   };
+
   return User;
 };

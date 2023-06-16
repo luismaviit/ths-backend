@@ -2,113 +2,41 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
 
- type User {
-     id: Int!
-     name: String
-     last_name:String,
-     email:String,
-     phone:String,
-     user:String,
-     password:String,
-     company:String,
-     work_department:String,
-     born_date:Date,
-     enabled:Boolean
+ type User { id: Int!, name: String, last_name:String, email:String,
+ phone:String, user:String, password:String, company:String, work_department:String,
+ born_date:Date, enabled:Boolean
  }
 
  extend type Mutation {
-     Login(
-       user:String,
-       password:String,
-     ):LoginResponse
-     create_Reg_Password(
-      token:String,
-      password:String
-     ):JSON
+     Login( user:String, password:String ): LoginResponse
 
-     CreateUser(
-       name: String!
-       last_name:String!,
-       email:String!,
-       phone:String,
-       user:String!,
-       password:String!,
-       company:String!,
-       work_department:String!,
-       enabled:Boolean,
-     ): ResponseUser
+     Create_Reg_Password( token:String, password:String ):JSON
 
-     UpdateUser(
-       id:Int!,
-       name:String,
-       last_name:String,
-       email:String,
-       phone:String,
-       user:String,
-       password:String,
-       company:String,
-       work_department:String,
-       born_date:Date,
-       enabled:Boolean
-     ): ResponseUser
+     CreateUser( name: String!, last_name:String!, email:String!, phone:String, user:String!,
+     password:String!, company:String!, work_department:String!, enabled:Boolean ): ResponseUser
 
-    UpdateManyUsers(
-      input: [ManyUsers]
-    ):JSON
-    DeleteUser(id:[Int!]):Boolean
-
+     UpdateUser( id:Int!, name: String, last_name:String, email:String, phone:String, 
+     user:String, password:String, company:String, work_department:String,
+     enabled:Boolean ): ResponseUser
+     
+     UpdateManyUsers( input: [ManyUsers] ):JSON
+     
+     DeleteUser(id:[Int!]):Boolean
  }
 
  extend type Query {
 
-     getAllUsers(
-        id: Int,
-        name: String,
-        last_name:String,
-        email:String,
-        phone:String,
-        user:String,
-        password:String,
-        company:String,
-        work_department:String,
-        born_date:Date,
-        enabled:Boolean
-     ): [User!]
+     getAllUsers(id:Int!, name: String, last_name:String, email:String, phone:String, 
+     user:String, password:String, company:String, work_department:String,
+     enabled:Boolean ): [User!]
 
  }
 
- input ManyUsers{
-    id:Int!,
-    name: String,
-    last_name:String,
-    email:String,
-    phone:String,
-    password:String,
-    company:String,
-    work_department:String,
-    born_date:Date,
-    enabled:Boolean,
- }
+ input ManyUsers{ id:Int!, name: String, last_name:String, email:String, phone:String, password:String,
+ company:String, work_department:String, born_date:Date, enabled:Boolean }
  
- type ResponseUser {
-     id: Int
-     name: String
-     last_name:String,
-     email:String,
-     phone:String,
-     user:String,
-     password:String,
-     company:String,
-     work_department: String,
-     born_date: Date,
-     enable: Boolean
- }
+ type ResponseUser { id: Int, name: String, last_name:String, email:String, phone:String, user:String,
+ password:String, company:String, work_department: String, born_date: Date, enable: Boolean }
 
- type LoginResponse {
-    id: Int!
-    name: String!
-    email: String!
-    last_name:String,
-    token: String!
- }
+ type LoginResponse { id: Int!, name: String!, email: String!, last_name:String, token: String! }
 `;
